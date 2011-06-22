@@ -10,12 +10,9 @@ class DaysSinceController  < ApplicationController
   end
 
   def show
-    year = params[:year].to_i
-    month = params[:month].to_i
-    day = params[:day].to_i
-    time = DateTime.new(year, month, day)
+    time = DateTime.new(params[:year].to_i, params[:month].to_i, params[:day].to_i).utc
 
-    @result = DaysSinceResult.new((DateTime.now-time).to_i)
+    @result = DaysSinceResult.new((DateTime.now.utc-time).to_i)
 
     respond_to do |format|
       format.html # show.html.erb
